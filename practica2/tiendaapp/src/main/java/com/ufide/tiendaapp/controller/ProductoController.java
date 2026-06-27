@@ -101,4 +101,13 @@ public String actualizar(@PathVariable Long id,
     ra.addFlashAttribute("ok", "Producto actualizado correctamente");
     return "redirect:/productos";
 }
+@PostMapping("/{id}/eliminar")
+public String eliminar(@PathVariable Long id,
+                       RedirectAttributes ra) {
+
+    productoService.eliminar(id);
+
+    ra.addFlashAttribute("ok", "Producto eliminado correctamente");
+    return "redirect:/productos";
+}
 }

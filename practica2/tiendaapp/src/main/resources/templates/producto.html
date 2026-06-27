@@ -86,12 +86,18 @@
                     <a class="btn btn-warning"
                     th:href="@{/productos/{id}/editar(id=${producto.id})}">
                     <i class="bi bi-pencil-square me-1"></i>Editar
-                </a>
-                <a class="btn btn-secondary" href="/productos">
-                    <i class="bi bi-arrow-left me-1"></i>Volver
-                 </a>
+                    </a>
 
-                 </div>
+                    <form th:action="@{/productos/{id}/eliminar(id=${producto.id})}" method="post">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash me-1"></i>Eliminar
+                            </button>
+                            </form>
+
+                            <a class="btn btn-secondary" href="/productos">
+                                <i class="bi bi-arrow-left me-1"></i>Volver
+                                </a>
+                                </div>
             </div>
         </div>
     </div>
