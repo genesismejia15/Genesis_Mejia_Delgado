@@ -14,6 +14,10 @@
     <div th:replace="~{fragments/header :: navbar}"></div>
 
     <main class="container my-4">
+        <div class="alert alert-success alert-dismissible fade show" th:if="${ok}">
+            <span th:text="${ok}">Operación realizada</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>

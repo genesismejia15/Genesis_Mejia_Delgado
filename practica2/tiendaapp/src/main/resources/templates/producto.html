@@ -88,11 +88,12 @@
                     <i class="bi bi-pencil-square me-1"></i>Editar
                     </a>
 
-                    <form th:action="@{/productos/{id}/eliminar(id=${producto.id})}" method="post">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="bi bi-trash me-1"></i>Eliminar
-                            </button>
-                            </form>
+                    <button type="button"
+                    class="btn btn-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalEliminar">
+                    <i class="bi bi-trash me-1"></i>Eliminar
+                    </button>
 
                             <a class="btn btn-secondary" href="/productos">
                                 <i class="bi bi-arrow-left me-1"></i>Volver
@@ -114,7 +115,33 @@
     </div>
 
 </main>
+<div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEliminarLabel">Confirmar eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
 
+            <div class="modal-body">
+                ¿Está seguro de que desea eliminar el producto
+                <strong th:text="${producto.nombre}">Producto</strong>?
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <form th:action="@{/productos/{id}/eliminar(id=${producto.id})}" method="post">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash me-1"></i>Eliminar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <footer th:replace="~{fragments/header :: footer}"></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
