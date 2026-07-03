@@ -70,6 +70,29 @@ public class EventoController {
         service.guardar(evento);
         return "redirect:/eventos";
     }
+
+    @GetMapping("/{id}/editar")
+    public String editar(@PathVariable Long id, Model model){
+        Evento evento = service.buscarPorId(id).orElse(null);
+        model.addAttribute("evento", evento);
+        model.addAttribute("modo", "editar");
+        return "eventos/form";
+    }
+
+    @PostMapping("/{id}")
+    public String actualizar(@PathVariable Long id,
+        @Valid @ModelAttribute("evento") Evento evento,
+        BindingResult result, Model model){
+            if (result.hasErrors()){
+                model.addAttribute("modo", "editar");
+                return "eventos/form";
+            }
+
+            evento.setId(id);
+            service.guardar(evento);
+            return "redirect:/eventos";
+        }
+    
 }
     
 
