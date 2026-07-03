@@ -14,6 +14,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Entidad Evento - representa un evento publico (concierto, taller, charla...).
@@ -130,4 +132,26 @@ public class Evento {
 
     public double getPrecio() { return precio; }
     public void setPrecio(double precio) { this.precio = precio; }
+
+    public boolean isLleno(){
+        return cuposVendidos >= cupoMaximo; }
+
+    public String getFechaFormateada() {
+    if (fecha == null) {
+        return "Sin fecha";
+    }
+
+    String[] meses = {
+        "enero", "febrero", "marzo", "abril", "mayo", "junio",
+        "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+    };
+
+    int dia = fecha.getDayOfMonth();
+    String mes = meses[fecha.getMonthValue() - 1];
+    int anio = fecha.getYear();
+
+    return dia + " de " + mes + " de " + anio;
 }
+
+}
+

@@ -43,6 +43,10 @@ public class EventoService {
         return repo.findByCategoria(categoria);
     }
 
+    public List<Evento> buscarPorNombre(String nombre){
+        return repo.findByNombreContainingIgnoreCase(nombre);
+    }
+
     public List<Evento> buscarProximos() {
         return repo.findByFechaGreaterThanEqualOrderByFechaAsc(LocalDate.now());
     }

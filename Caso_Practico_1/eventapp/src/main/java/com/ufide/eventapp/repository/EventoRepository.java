@@ -26,5 +26,5 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 
     // TODO Caso Practico: aca podes agregar otros query methods que necesites.
     // Ejemplo (no obligatorio):
-    //   List<Evento> findByNombreContainingIgnoreCase(String texto);
+    List<Evento> findByNombreContainingIgnoreCase(String nombre);
 }

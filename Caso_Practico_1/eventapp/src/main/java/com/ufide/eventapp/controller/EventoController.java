@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ufide.eventapp.entity.Evento;
 import com.ufide.eventapp.service.EventoService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controlador de eventos - estado base del Caso Practico 1.
@@ -52,6 +54,8 @@ public class EventoController {
 
     // TODO Caso Practico 1: agregar aca los endpoints del CRUD y el GET con parametro.
 
+
+
     @GetMapping("/nuevo")
     public String nuevo(Model model){
         model.addAttribute("evento", new Evento());
@@ -61,13 +65,14 @@ public class EventoController {
 
         @PostMapping
         public String guardar(@Valid @ModelAttribute("evento")Evento evento,
-    BindingResult result, Model model) {
+    BindingResult result, Model model, RedirectAttributes ra) {
         if(result.hasErrors()){
             model.addAttribute("modo", "crear");
             return "eventos/form"; 
         }
 
         service.guardar(evento);
+        ra.addFlashAttribute("ok", "Evento guardado correctamente!");
         return "redirect:/eventos";
     }
 
@@ -82,7 +87,7 @@ public class EventoController {
     @PostMapping("/{id}")
     public String actualizar(@PathVariable Long id,
         @Valid @ModelAttribute("evento") Evento evento,
-        BindingResult result, Model model){
+        BindingResult result, Model model, RedirectAttributes ra){
             if (result.hasErrors()){
                 model.addAttribute("modo", "editar");
                 return "eventos/form";
@@ -90,6 +95,7 @@ public class EventoController {
 
             evento.setId(id);
             service.guardar(evento);
+            ra.addFlashAttribute("ok", "Evento editado correctamente!");
             return "redirect:/eventos";
         }
     @GetMapping("/categoria/{categoria}")
@@ -98,9 +104,17 @@ public class EventoController {
      return "eventos";
 }
 
+@GetMapping("/buscar")
+public String buscar(@RequestParam String nombre, Model model) {
+    model.addAttribute("eventos", service.buscarPorNombre(nombre));
+    return "eventos";
+}
+
+    
     @PostMapping("/{id}/eliminar")
-    public String eliminar(@PathVariable Long id) {
+    public String eliminar(@PathVariable Long id, RedirectAttributes ra) {
      service.eliminar(id);
+     ra.addFlashAttribute("ok", "Evento eliminado correctamente!");
     return "redirect:/eventos";
 }
 }
