@@ -52,16 +52,31 @@
                         <i class="bi bi-geo-alt me-1"></i><span th:text="${e.lugar}">Lugar</span>
                     </div>
                     <div class="d-flex justify-content-between align-items-center mt-2">
-                        <small>
-                            <span class="fw-bold" th:text="${e.cuposVendidos} + ' / ' + ${e.cupoMaximo}">0/0</span>
-                            cupos
-                        </small>
-                        <a class="btn btn-outline-primary btn-sm"
-                           th:href="@{/eventos/{id}(id=${e.id})}">
-                            Ver detalle
-                            <i class="bi bi-arrow-right ms-1"></i>
-                        </a>
-                    </div>
+    <small>
+        <span class="fw-bold" th:text="${e.cuposVendidos} + ' / ' + ${e.cupoMaximo}">0/0</span>
+        cupos
+    </small>
+
+    <div class="btn-group">
+        <a class="btn btn-outline-primary btn-sm"
+           th:href="@{/eventos/{id}(id=${e.id})}">
+            Ver
+        </a>
+
+        <a class="btn btn-outline-warning btn-sm"
+           th:href="@{/eventos/{id}/editar(id=${e.id})}">
+            Editar
+        </a>
+
+        <button type="button"
+                class="btn btn-outline-danger btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#modalEliminar"
+                th:attr="data-id=${e.id},data-nombre=${e.nombre}">
+            Eliminar
+        </button>
+    </div>
+</div>
                     <!--
                       TODO Caso Practico:
                       Aca podes agregar los botones "Editar" y "Eliminar" para cada evento.

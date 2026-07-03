@@ -92,7 +92,17 @@ public class EventoController {
             service.guardar(evento);
             return "redirect:/eventos";
         }
-    
+    @GetMapping("/categoria/{categoria}")
+    public String filtrarPorCategoria(@PathVariable String categoria, Model model) {
+    model.addAttribute("eventos", service.buscarPorCategoria(categoria));
+     return "eventos";
+}
+
+    @PostMapping("/{id}/eliminar")
+    public String eliminar(@PathVariable Long id) {
+     service.eliminar(id);
+    return "redirect:/eventos";
+}
 }
     
 
