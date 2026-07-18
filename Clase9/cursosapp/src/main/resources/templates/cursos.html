@@ -53,7 +53,7 @@
                             <i class="bi bi-person-circle me-1"></i>
                             <!-- CLASE 9 - PASO E.1: cuando profesor sea una relacion,
                                  cambiar ${c.profesor} por ${c.profesor.nombre} -->
-                            <span th:text="${c.profesor}">Profesor</span>
+                            <span th:text="${c.profesor.nombre}">Profesor</span>
                         </small>
                         <div class="btn-group btn-group-sm">
                             <a class="btn btn-outline-primary" th:href="@{/cursos/{id}(id=${c.id})}">Ver</a>
