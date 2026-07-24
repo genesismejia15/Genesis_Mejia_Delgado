@@ -71,10 +71,10 @@ JOIN profesores p ON p.id = c.profesor_id;
 --   estudiante -> estudiante123
 -- ============================================================
 
--- INSERT INTO usuarios (username, password, rol) VALUES
--- ('admin', '$2b$10$Qj/x8JpJMw7eOP7tPSqyRO9.IqRQQSyDWMQUUy/1mI0IJTPy5eSIq', 'ADMIN'),
--- ('profesor', '$2b$10$aCb2CqrheWlQh7h0KM9/3etUtNdfqWgzByyBjCtOAsIIS0SmBlkXe', 'USER'),
--- ('estudiante', '$2b$10$2Ki/2UdNHxrBaMkKF/ITVOmVvsFxtvh1mVKH1Udma5InIWb7NdsKC', 'USER');
+INSERT INTO usuarios (username, password, rol) VALUES
+('admin', '$2b$10$Qj/x8JpJMw7eOP7tPSqyRO9.IqRQQSyDWMQUUy/1mI0IJTPy5eSIq', 'ADMIN'),
+('profesor', '$2b$10$aCb2CqrheWlQh7h0KM9/3etUtNdfqWgzByyBjCtOAsIIS0SmBlkXe', 'USER'),
+('estudiante', '$2b$10$2Ki/2UdNHxrBaMkKF/ITVOmVvsFxtvh1mVKH1Udma5InIWb7NdsKC', 'USER');
 
 -- Verificar (descomentar junto con el INSERT de arriba)
 -- SELECT id, username, rol FROM usuarios;

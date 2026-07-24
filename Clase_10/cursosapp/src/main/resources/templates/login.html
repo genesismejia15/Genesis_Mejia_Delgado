@@ -24,7 +24,7 @@
               Spring Security redirige solo a /login?error si las credenciales
               son invalidas, y a /login?logout despues de un logout exitoso -
               no hace falta ningun codigo en el controller para esto.
-
+-->
             <div class="alert alert-danger" th:if="${param.error}">
                 <i class="bi bi-exclamation-triangle me-2"></i>
                 Usuario o contrasena incorrectos.
@@ -34,7 +34,7 @@
                 <i class="bi bi-check-circle me-2"></i>
                 Sesion cerrada correctamente.
             </div>
-            -->
+            
 
             <!--
               CLASE 10 - PASO D.2: descomentar el formulario de login.
@@ -42,7 +42,7 @@
               intercepta automaticamente - no existe (ni hace falta) un
               LoginController. Los nombres de los campos, name="username" y
               name="password", son los que Spring Security espera por default.
-
+-->
             <form th:action="@{/login}" method="post">
                 <div class="mb-3">
                     <label class="form-label">Usuario</label>
@@ -56,7 +56,7 @@
                     <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
                 </button>
             </form>
-            -->
+          
 
             <p class="text-muted small mt-3 mb-0">
                 Usuarios de prueba (ver <code>seed-data.sql</code>):

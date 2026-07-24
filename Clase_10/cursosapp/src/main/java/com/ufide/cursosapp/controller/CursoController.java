@@ -1,6 +1,6 @@
 package com.ufide.cursosapp.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,22 +11,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.validation.Valid;
-
 import com.ufide.cursosapp.entity.Curso;
 import com.ufide.cursosapp.service.CursoService;
 import com.ufide.cursosapp.service.ProfesorService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/cursos")
 public class CursoController {
 
-    @Autowired
-    private CursoService cursoService;
+  
+    private final CursoService cursoService;          
 
-    @Autowired
-    private ProfesorService profesorService;
+    private final ProfesorService profesorService; 
 
+    public CursoController(CursoService cursoService, ProfesorService profesorService){  
+ this.cursoService = cursoService;
+ this.profesorService = profesorService; 
+    }
     @GetMapping
     public String listar(Model modelo) {
         modelo.addAttribute("cursos", cursoService.listarConProfesor());
