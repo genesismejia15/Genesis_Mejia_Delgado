@@ -8,8 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-// CLASE 11 - PASO G.3: descomentar este import junto con el @Bean de abajo.
-// import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableWebSecurity
@@ -33,10 +32,10 @@ public class SecurityConfig {
     // esto, maximumSessions() de mas abajo cuenta sesiones viejas que el
     // navegador ya cerro como si siguieran activas (se "desincroniza" con
     // la realidad).
-    // @Bean
-    // public HttpSessionEventPublisher httpSessionEventPublisher() {
-    //     return new HttpSessionEventPublisher();
-    // }
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+         return new HttpSessionEventPublisher();
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -49,7 +48,7 @@ public class SecurityConfig {
                 // CLASE 11 - PASO G.3 (continua): agregar tambien
                 // "/olvide-password" y "/restablecer-password" - alguien que
                 // olvido su contrasena, por definicion, no esta logueado.
-                .requestMatchers("/", "/login", "/css/**", "/img/**").permitAll()
+                .requestMatchers("/", "/login",  "/403", "/olvide-password", "/restablecer-password", "/css/**", "/img/**").permitAll()
                 // Todo lo demas (incluido /cursos/**) requiere estar logueado.
                 // La restriccion POR ROL ahora vive en los metodos del
                 // Controller con @PreAuthorize (Parte B del lab).
@@ -66,8 +65,8 @@ public class SecurityConfig {
                 // CLASE 11 - PASO D.1: descomentar estas dos lineas para un
                 // logout mas completo (invalida la sesion del servidor y
                 // borra la cookie, ademas de redirigir).
-                // .invalidateHttpSession(true)
-                // .deleteCookies("JSESSIONID")
+                 .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
                 .permitAll()
             )
             // CLASE 11 - PASO C.2: quitar el punto y coma de la linea de
@@ -80,10 +79,10 @@ public class SecurityConfig {
             // 1 sesion activa por usuario: si el mismo username se loguea
             // desde un segundo navegador, maxSessionsPreventsLogin(false)
             // invalida la sesion VIEJA en vez de bloquear el login nuevo.
-            // .sessionManagement(session -> session
-            //     .maximumSessions(1)
-            //     .maxSessionsPreventsLogin(false)
-            // )
+                 .sessionManagement(session -> session
+                 .maximumSessions(1)
+                 .maxSessionsPreventsLogin(false)
+             )
             ;
         return http.build();
     }
