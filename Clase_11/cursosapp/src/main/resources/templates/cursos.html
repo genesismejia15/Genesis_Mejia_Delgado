@@ -31,7 +31,8 @@
           esto es solo cosmetico - la proteccion real es el @PreAuthorize del
           Controller (Parte B).
         -->
-        <a class="btn btn-primary"sec:authorize="hasRole('ADMIN')" th:href="@{/cursos/nuevo}">
+        <a class="btn btn-primary"sec:authorize="hasRole('ADMIN')"
+         th:href="@{/cursos/nuevo}">
             <i class="bi bi-plus-circle me-1"></i> Nuevo curso
         </a>
     </div>
