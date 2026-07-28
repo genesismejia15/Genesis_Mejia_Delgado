@@ -2,8 +2,7 @@ package com.ufide.cursosapp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-// CLASE 11 - PASO A.1: descomentar este import junto con la anotacion de abajo.
-// import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 // @PreAuthorize en los metodos del Controller. Sin esta anotacion,
 // @PreAuthorize se ignora silenciosamente - no tira error, simplemente
 // no protege nada (el error mas comun de esta clase).
-// @EnableMethodSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     // BCrypt: cada vez que se hashea la misma contrasena da un resultado distinto
@@ -75,7 +74,7 @@ public class SecurityConfig {
             // arriba (".logout(...)") y descomentar esta linea completa para
             // redirigir a una pagina 403 propia cuando @PreAuthorize bloquee
             // a alguien. Fijate que el punto y coma final se mueve para aca.
-            // .exceptionHandling(ex -> ex.accessDeniedPage("/403"))
+             .exceptionHandling(ex -> ex.accessDeniedPage("/403"))
             // CLASE 11 - PASO G.4: descomentar (junto con quitar el punto y
             // coma de la linea de arriba, igual que en el PASO C.2). Maximo
             // 1 sesion activa por usuario: si el mismo username se loguea

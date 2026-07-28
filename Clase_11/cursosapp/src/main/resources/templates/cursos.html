@@ -31,7 +31,7 @@
           esto es solo cosmetico - la proteccion real es el @PreAuthorize del
           Controller (Parte B).
         -->
-        <a class="btn btn-primary" th:href="@{/cursos/nuevo}">
+        <a class="btn btn-primary"sec:authorize="hasRole('ADMIN')" th:href="@{/cursos/nuevo}">
             <i class="bi bi-plus-circle me-1"></i> Nuevo curso
         </a>
     </div>
@@ -70,11 +70,11 @@
                         -->
                         <div class="btn-group btn-group-sm">
                             <a class="btn btn-outline-primary" th:href="@{/cursos/{id}(id=${c.id})}">Ver</a>
-                            <a class="btn btn-outline-warning" th:href="@{/cursos/{id}/editar(id=${c.id})}">
+                            <a class="btn btn-outline-warning"sec:authorize="hasRole('ADMIN')" th:href="@{/cursos/{id}/editar(id=${c.id})}">
                                 <i class="bi bi-pencil"></i>
                             </a>
                             <button type="button" class="btn btn-outline-danger btn-eliminar"
-                                    data-bs-toggle="modal" data-bs-target="#modalEliminar"
+                                    data-bs-toggle="modal" sec:authorize="hasRole('ADMIN')" data-bs-target="#modalEliminar"
                                     th:data-id="${c.id}" th:data-nombre="${c.nombre}">
                                 <i class="bi bi-trash"></i>
                             </button>

@@ -26,8 +26,8 @@ public class HomeController {
     // tiene el rol necesario (ej. USER intentando eliminar un curso).
     // Necesita el template templates/403.html (PASO C.4).
     //
-    // @GetMapping("/403")
-    // public String accesoDenegado() {
-    //     return "403";
-    // }
+     @GetMapping("/403")
+     public String accesoDenegado() {
+         return "403";
+     }
 }

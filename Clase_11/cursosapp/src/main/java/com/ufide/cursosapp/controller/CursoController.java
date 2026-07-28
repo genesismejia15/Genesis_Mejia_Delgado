@@ -1,8 +1,6 @@
 package com.ufide.cursosapp.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-// CLASE 11 - PASO B.1: descomentar este import.
-// import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,11 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.validation.Valid;
-
 import com.ufide.cursosapp.entity.Curso;
 import com.ufide.cursosapp.service.CursoService;
 import com.ufide.cursosapp.service.ProfesorService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/cursos")
@@ -54,7 +52,7 @@ public class CursoController {
     // (Spring agrega el prefijo ROLE_ solo). Si un USER intenta entrar aca,
     // Spring Security lanza AccessDeniedException y SecurityConfig lo
     // redirige a /403 (una vez que hiciste la Parte C del lab).
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/nuevo")
     public String mostrarFormNuevo(Model modelo) {
         modelo.addAttribute("curso", new Curso());
@@ -63,7 +61,7 @@ public class CursoController {
     }
 
     // CLASE 11 - PASO B.3: descomentar.
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public String guardar(@Valid @ModelAttribute("curso") Curso curso,
                           BindingResult result,
@@ -78,7 +76,7 @@ public class CursoController {
 
     // ===== UPDATE =====
     // CLASE 11 - PASO B.4: descomentar.
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}/editar")
     public String mostrarFormEditar(@PathVariable Long id, Model modelo) {
         Curso curso = cursoService.buscarPorId(id).orElseThrow();
@@ -88,7 +86,7 @@ public class CursoController {
     }
 
     // CLASE 11 - PASO B.4 (continua): descomentar.
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/{id}")
     public String actualizar(@PathVariable Long id,
                              @Valid @ModelAttribute("curso") Curso curso,
@@ -107,7 +105,7 @@ public class CursoController {
     // CLASE 11 - PASO B.5: descomentar. Ojo: esta vez usa hasAuthority en vez
     // de hasRole - a proposito, para comparar ambas sintaxis. Logran
     // EXACTAMENTE el mismo resultado (ver bibliografia_clase11.md).
-    // @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/{id}/eliminar")
     public String eliminar(@PathVariable Long id, RedirectAttributes ra) {
         cursoService.eliminar(id);
