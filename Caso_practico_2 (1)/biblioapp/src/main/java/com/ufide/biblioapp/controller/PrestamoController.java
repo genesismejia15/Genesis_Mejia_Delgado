@@ -1,5 +1,7 @@
 package com.ufide.biblioapp.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -65,5 +67,13 @@ public class PrestamoController {
     public String listar(Model model) {
        model.addAttribute("prestamos", prestamoService.listar());
        return "prestamos";
+}
+
+@GetMapping("/mis-prestamos")
+@PreAuthorize("hasRole('LECTOR')")
+public String misPrestamos(Model model, Principal principal) {
+    Usuario usuario = usuarioService.buscarPorUsername(principal.getName());
+    model.addAttribute("prestamos", prestamoService.listarPorUsuario(usuario));
+    return "prestamos";
 }
 }
