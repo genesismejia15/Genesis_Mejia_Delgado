@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Prestamos')}"></head>
+<body>
+
+<div th:replace="~{fragments/header :: nav}"></div>
+
+<div class="container">
+
+    <h2 class="mb-4">Prestamos</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Libro</th>
+                <th>Usuario</th>
+                <th>Fecha prestamo</th>
+                <th>Fecha limite</th>
+                <th>Fecha devolucion</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="prestamo : ${prestamos}">
+                <td th:text="${prestamo.libro.titulo}"></td>
+                <td th:text="${prestamo.usuario.username}"></td>
+                <td th:text="${prestamo.fechaPrestamo}"></td>
+                <td th:text="${prestamo.fechaLimite}"></td>
+
+                <td th:text="${prestamo.fechaDevolucion != null ? prestamo.fechaDevolucion : 'Pendiente'}"></td>
+
+                <td>
+                    <form th:if="${prestamo.fechaDevolucion == null}"
+                          th:action="@{/prestamos/devolver}"
+                          method="post">
+
+                        <input type="hidden"
+                               name="id"
+                               th:value="${prestamo.id}">
+
+                        <button type="submit" class="btn btn-success btn-sm">
+                            Devolver
+                        </button>
+
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

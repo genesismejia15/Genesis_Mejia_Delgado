@@ -52,4 +52,16 @@ public class PrestamoController {
 
         return "redirect:/libros";
     }
+
+    @PostMapping("/prestamos/devolver")
+    public String devolver(@RequestParam Long id) {
+        prestamoService.devolver(id);
+        return "redirect:/prestamos";
+    }
+
+    @GetMapping("/prestamos")
+    public String listar(Model model) {
+       model.addAttribute("prestamos", prestamoService.listar());
+       return "prestamos";
+}
 }
