@@ -62,4 +62,8 @@ public class PrestamoService {
             prestamoRepository.save(prestamo);
         }
     }
+
+    public List<Prestamo> prestamosAtrasados() {
+    return prestamoRepository.prestamosAtrasados();
+}
 }
