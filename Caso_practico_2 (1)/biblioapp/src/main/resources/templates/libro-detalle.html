@@ -22,6 +22,11 @@
                  que lleve al formulario de registrar un prestamo.
                  ========================================================== -->
 
+                 <a th:href="@{/prestamos/nuevo(libroId=${libro.id})}"
+                 class="btn btn-primary">
+                 Prestar este libro
+              </a>
+
             <a href="/libros" class="btn btn-secondary">Volver al catalogo</a>
         </div>
     </div>
