@@ -76,4 +76,11 @@ public String misPrestamos(Model model, Principal principal) {
     model.addAttribute("prestamos", prestamoService.listarPorUsuario(usuario));
     return "prestamos";
 }
+
+@GetMapping("/prestamos/atrasados")
+@PreAuthorize("hasRole('BIBLIOTECARIO')")
+public String atrasados(Model model) {
+    model.addAttribute("prestamos", prestamoService.prestamosAtrasados());
+    return "prestamos-atrasados";
+}
 }
