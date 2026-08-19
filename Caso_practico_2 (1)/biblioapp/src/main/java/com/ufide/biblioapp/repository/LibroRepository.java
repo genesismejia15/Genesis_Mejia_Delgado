@@ -1,7 +1,12 @@
 package com.ufide.biblioapp.repository;
 
-import com.ufide.biblioapp.entity.Libro;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.ufide.biblioapp.entity.Libro;
+
 
 public interface LibroRepository extends JpaRepository<Libro, Long> {
 
@@ -17,4 +22,9 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     // PrestamoRepository, que vos vas a crear junto con la
     // entidad Prestamo.
     // ==========================================================
+    @Query("SELECT l FROM Libro l LEFT JOIN Prestamo p ON p.libro = l WHERE p.id IS NULL")
+List<Libro> librosNuncaPrestados();
+
+
+    List<Libro> findByCategoria(String categoria);
 }

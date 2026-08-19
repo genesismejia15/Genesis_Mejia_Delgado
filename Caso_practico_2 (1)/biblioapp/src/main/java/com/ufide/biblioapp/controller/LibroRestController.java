@@ -43,4 +43,8 @@ public class LibroRestController {
         Libro guardado = libroService.guardar(libro);
         return ResponseEntity.status(HttpStatus.CREATED).body(guardado);
     }
+    @GetMapping("/categoria/{categoria}")
+    public List<Libro> buscarPorCategoria(@PathVariable String categoria) {
+        return libroService.buscarPorCategoria(categoria);
+}
 }
